@@ -1,0 +1,11 @@
+.title {
+  display: flex;
+}
+
+nav ul {
+  display: inline;
+}
+
+.page-title {
+  text-align: center;
+}

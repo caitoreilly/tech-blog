@@ -10,20 +10,21 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <header>
-      <h1>Tech News</h1>
-      <nav>
-        <ul>
-          {{#if loggedIn}}
-            <li><a href="/">Home</a></li>
-            <a href="/dashboard">dashboard</a>
-            <button id="logout" class="btn-no-style">logout</button>
-          {{else}}
-            <a href="/login">login</a>
-          {{/if}}
-        </ul>
-      </nav>
-    </header>
+      <header>
+        <h1 class="title">Tech News</h1>
+        <nav>
+          <ul>
+            {{#if loggedIn}}
+              <li><a href="/">Home</a></li>
+              <a href="/dashboard">dashboard</a>
+              <button id="logout" class="btn-no-style">logout</button>
+            {{else}}
+            <a href="/">homepage</a>
+              <a href="/login">login</a>
+            {{/if}}
+          </ul>
+        </nav>
+      </header>
     <main>
       {{{body}}}
     </main>
