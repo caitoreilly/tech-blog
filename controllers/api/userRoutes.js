@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const withAuth = require("../../utils/auth.js");
 const { User, Post } = require("../../models");
 
 // login route that will verify the uers's identity (expects email & pw)
@@ -58,22 +57,16 @@ router.get("/:id", (req, res) => {
     include: [
       {
         model: Post,
-        attributes: ["id", "title", "post_url", "created_at"],
+        attributes: ["title", "body"],
       },
       // include the Comment model here:
       {
         model: Comment,
-        attributes: ["id", "comment_text", "created_at"],
+        attributes: ["body"],
         include: {
           model: Post,
           attributes: ["title"],
         },
-      },
-      {
-        model: Post,
-        attributes: ["title"],
-        through: Vote,
-        as: "voted_posts",
       },
     ],
   })
@@ -110,7 +103,5 @@ router.post("/", (req, res) => {
     });
   });
 });
-
-
 
 module.exports = router;
