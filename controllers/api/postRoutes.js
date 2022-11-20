@@ -4,6 +4,7 @@ const { Post } = require("../../models");
 
 // POST create post
 router.post("/", withAuth, (req, res) => {
+  console.log(req.body, "req.body");
   Post.create({
     ...req.body,
     user_id: req.session.user_id,

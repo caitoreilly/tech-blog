@@ -1,3 +1,4 @@
+<h2>Dashboard</h2>
 <section>
   <h2>Create New Post</h2>
 
@@ -8,7 +9,7 @@
     </div>
     <div>
       <label for="post-body">Body</label>
-      <input id="post-body" name="post-body" />
+      <input type="text" id="post-body"name="post-body" />
     </div>
     <button type="submit" class="btn">Create</button>
   </form>
@@ -20,12 +21,12 @@
     <ol>
         {{#each posts as |post|}}
         <li>
-            {{> post-info post}}
-            <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
-        </li>
+            {{!-- {{> post-info post}} --}}
+            {{!-- <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a> --}}
+        {{!-- </li> --}}
         {{/each}}
     </ol>
 </section>
-{{/if}}
+{{/if}} 
 
 <script src="/javascript/add-post.js"></script>
