@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User, Post } = require("../../models");
+const { restore } = require("../../models/User");
 
 // login route that will verify the uers's identity (expects email & pw)
 router.post("/login", (req, res) => {
@@ -25,9 +26,10 @@ router.post("/login", (req, res) => {
 
     req.session.save(() => {
       // declare session variables
-      req.session.user_id = dbUserData.id;
+      req.session.userId = dbUserData.id;
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
+      console.log(req)
 
       res.json({ user: dbUserData, message: "You are now logged in!" });
     });
@@ -88,13 +90,13 @@ router.post("/", (req, res) => {
   console.log(req.body);
   //expects {username: "Lernantino", email: "lernantino@gmail.com", password: "password123"}
   User.create({
-    username: req.body.username,
+    // username: req.body.username,
     email: req.body.email,
     password: req.body.password,
   }).then((dbUserData) => {
     req.session.save(() => {
       req.session.user_id = dbUserData.id;
-      req.session.username = dbUserData.username;
+      // req.session.username = dbUserData.username;
       req.session.loggedIn = true;
       console.log(dbUserData);
       console.log("+++++++++++++");
@@ -102,6 +104,16 @@ router.post("/", (req, res) => {
       res.json(dbUserData);
     });
   });
+});
+
+router.post("/logout", (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
 });
 
 module.exports = router;
