@@ -4,25 +4,27 @@ const router = require("express").Router();
 
 router.get("/", (req, res) => {
   Post.findAll({
-    attributes: ["title", "body"],
-    include: [
-      {
-        model: Comment,
-        attributes: ["body"],
-        include: {
-          model: User,
-          attributes: ["username"],
-        },
-      },
-      {
-        model: User,
-        attributes: ["username"],
-      },
-    ],
+    attributes: ["title", "body", "createdAt", "userId", "id"],
+    // include: [
+    //   {
+    //     model: Comment,
+    //     attributes: ["body"],
+    //     include: {
+    //       model: User,
+    //       attributes: ["username"],
+    //     },
+    //   },
+    //   {
+    //     model: User,
+    //     // attributes: ["username"],
+    //   },
+    // ],
+    include: [User],
   })
     .then((dbPostData) => {
       const posts = dbPostData.map((post) => post.get({ plain: true }));
-      res.render("homepage", { posts });
+      res.render("homepage", { posts, loggedIn: req.session.loggedIn });
+      // res.json(posts);
     })
     .catch((err) => {
       console.log(err);
@@ -33,14 +35,41 @@ router.get("/", (req, res) => {
 // route to login
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect("/");
+    res.redirect("/dashboard");
     return;
   }
   res.render("login");
 });
 
-router.get("/signup", (req, res) => {
-  res.render("signup");
+router.get("/post/:id", (req, res) => {
+  Post.findOne({
+    where: { id: req.params.id },
+    attributes: ["title", "body", "createdAt", "userId"],
+    // include: [
+    //   {
+    //     model: Comment,
+    //     attributes: ["body"],
+    //     include: {
+    //       model: User,
+    //       attributes: ["username"],
+    //     },
+    //   },
+    //   {
+    //     model: User,
+    //     // attributes: ["username"],
+    //   },
+    // ],
+    include: [User],
+  })
+    .then((dbPostData) => {
+      const post = dbPostData.get({ plain: true });
+      res.render("singlepost", { ...post, loggedIn: req.session.loggedIn });
+      // res.json(posts);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;

@@ -4,10 +4,10 @@ const { Post } = require("../../models");
 
 // POST create post
 router.post("/", withAuth, (req, res) => {
-  console.log(req.body, "req.body");
+  console.log(req.session.userId);
   Post.create({
     ...req.body,
-    user_id: req.session.user_id,
+    userId: req.session.userId,
   })
     .then((newPostData) => {
       if (!newPostData) {
