@@ -1,6 +1,22 @@
-{{> post-info post}}
+{{!-- {{> post-info post}} --}}
+<div class="card">
+  <div class="card-heading">
+    <h2>
+      <a href="/post/{{id}}">{{title}}</a>
+    </h2>
+    <div>
+      Posted by
+      {{User.username}}
+      on
+      {{format_date createdAt}}
+    </div>
+  </div>
+  <div class="card-body">
+    {{body}}
+  </div>
+</div>
 
-{{#if loggedIn}}
+{{!-- {{#if loggedIn}} --}}
 <form class="comment-form">
   <div>
     <textarea name="comment-body"></textarea>
@@ -10,10 +26,19 @@
     <button type="submit">add comment</button>
   </div>
 </form>
-{{/if}}
+{{!-- {{/if}} --}}
 
-{{> comments post.comments}}
+{{!-- {{> comments post.comments}} --}}
 
-{{#if loggedIn}}
+<div class="comment-list">
+  {{#each comments as |comment|}}
+    <div class="text">
+      {{Comment.body}}
+    </div>
+  {{/each}}
+
+</div>
+
+{{!-- {{#if loggedIn}} --}}
 <script src="/javascript/comment.js"></script>
-{{/if}}
+{{!-- {{/if}} --}}

@@ -2,9 +2,11 @@ const { Post, Comment, User } = require("../models");
 
 const router = require("express").Router();
 
+// localhost:3001/ works
+
 router.get("/", (req, res) => {
   Post.findAll({
-    attributes: ["title", "body", "createdAt", "userId", "id"],
+    // attributes: ["title", "body", "createdAt", "userId", "id"],
     // include: [
     //   {
     //     model: Comment,
@@ -44,7 +46,7 @@ router.get("/login", (req, res) => {
 router.get("/post/:id", (req, res) => {
   Post.findOne({
     where: { id: req.params.id },
-    attributes: ["title", "body", "createdAt", "userId"],
+    // attributes: ["title", "body", "createdAt", "userId"],
     // include: [
     //   {
     //     model: Comment,
@@ -59,12 +61,12 @@ router.get("/post/:id", (req, res) => {
     //     // attributes: ["username"],
     //   },
     // ],
-    include: [User],
+    include: [User, { model: Comment, include: { model: User } }],
   })
     .then((dbPostData) => {
       const post = dbPostData.get({ plain: true });
       res.render("singlepost", { ...post, loggedIn: req.session.loggedIn });
-      // res.json(posts);
+      // res.json(post);
     })
     .catch((err) => {
       console.log(err);

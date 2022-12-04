@@ -1,4 +1,4 @@
-{{#each posts}}
+{{!-- {{#each posts}}
   <div class="card">
     <div class="card-heading">
       <h2>
@@ -12,4 +12,27 @@
       {{body}}
     </div>
   </div>
+  {{/each}} --}}
+
+<ol class="post-list">
+  {{#each posts as |post|}}
+    <li>
+      <div class="card">
+        <div class="card-heading">
+          <h2>
+            <a href="/post/{{id}}">{{post.title}}</a>
+          </h2>
+          <div>
+            Posted by
+            {{User.username}}
+            on
+            {{format_date createdAt}}
+          </div>
+        </div>
+        <div class="card-body">
+          {{body}}
+        </div>
+      </div>
+    </li>
   {{/each}}
+</ol>

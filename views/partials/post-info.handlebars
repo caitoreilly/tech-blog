@@ -1,9 +1,16 @@
 <div class="card">
-    <div>
-    {{!-- <a href="/post/{{id}}">{{comments.length}}
-      {{format_plural "comment" comments.length}}</a> --}}
-    </div>
   <div class="card-heading">
-    <h3><a class="edit-link" href="/dashboard/edit/{{id}}">{{title}}</a></h3>
+    <h2>
+      <a href="/post/{{id}}">{{title}}</a>
+    </h2>
+    <div>
+      Posted by
+      {{User.username}}
+      on
+      {{format_date createdAt}}
+    </div>
+  </div>
+  <div class="card-body">
+    {{body}}
   </div>
 </div>
