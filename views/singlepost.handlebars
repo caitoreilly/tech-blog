@@ -1,15 +1,19 @@
-<div class="card">
-  <div class="card-heading">
-    <h2>{{title}}
-    </h2>
-    <div>
-      Posted by
-      {{User.username}}
-      on
-      {{format_date createdAt}}
-    </div>
+{{> post-info post}}
+
+{{#if loggedIn}}
+<form class="comment-form">
+  <div>
+    <textarea name="comment-body"></textarea>
   </div>
-  <div class="card-body">
-    {{body}}
+
+  <div>
+    <button type="submit">add comment</button>
   </div>
-</div>
+</form>
+{{/if}}
+
+{{> comments post.comments}}
+
+{{#if loggedIn}}
+<script src="/javascript/comment.js"></script>
+{{/if}}
