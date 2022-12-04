@@ -10,26 +10,26 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-      <header>
-        <h1 class="title">Tech Blog</h1>
-        <nav>
-          <ul>
-            {{#if loggedIn}}
-              <li><a href="/">Home</a></li>
-              <li><a href="/dashboard">dashboard</a></li>
-              <button id="logout" class="btn-no-style">logout</button>
-            {{else}}
+    <header>
+      <h1 class="title">Tech Blog</h1>
+      <nav>
+        <ul>
+          {{#if loggedIn}}
+            <li><a href="/">Home</a></li>
+            <li><a href="/dashboard">dashboard</a></li>
+            <button id="logout" class="btn-no-style">logout</button>
+          {{else}}
             <a href="/">homepage</a>
-              <a href="/login">login</a>
-            {{/if}}
-          </ul>
-        </nav>
-      </header>
+            <a href="/login">login</a>
+          {{/if}}
+        </ul>
+      </nav>
+    </header>
     <main>
       {{{body}}}
     </main>
     {{#if loggedIn}}
-    <scrip src="/javascript/logout.js"></scrip>
+      <script src="/javascript/logout.js"></script>
     {{/if}}
   </body>
 </html>
