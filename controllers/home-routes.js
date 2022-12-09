@@ -6,22 +6,21 @@ const router = require("express").Router();
 
 router.get("/", (req, res) => {
   Post.findAll({
-    // attributes: ["title", "body", "createdAt", "userId", "id"],
-    // include: [
-    //   {
-    //     model: Comment,
-    //     attributes: ["body"],
-    //     include: {
-    //       model: User,
-    //       attributes: ["username"],
-    //     },
-    //   },
-    //   {
-    //     model: User,
-    //     // attributes: ["username"],
-    //   },
-    // ],
-    include: [User],
+    attributes: ["title", "body", "createdAt", "userId", "id"],
+    include: [
+      {
+        model: Comment,
+        attributes: ["body"],
+        include: {
+          model: User,
+          attributes: ["username"],
+        },
+      },
+      {
+        model: User,
+        attributes: ["username"],
+      },
+    ],
   })
     .then((dbPostData) => {
       const posts = dbPostData.map((post) => post.get({ plain: true }));
@@ -46,7 +45,7 @@ router.get("/login", (req, res) => {
 router.get("/post/:id", (req, res) => {
   Post.findOne({
     where: { id: req.params.id },
-    // attributes: ["title", "body", "createdAt", "userId"],
+    attributes: ["title", "body", "createdAt", "userId"],
     // include: [
     //   {
     //     model: Comment,
@@ -58,13 +57,14 @@ router.get("/post/:id", (req, res) => {
     //   },
     //   {
     //     model: User,
-    //     // attributes: ["username"],
+    //     attributes: ["username"],
     //   },
     // ],
-    include: [User, { model: Comment, include: { model: User } }],
+    include: [User, { model: Comment, include: User }],
   })
     .then((dbPostData) => {
       const post = dbPostData.get({ plain: true });
+      console.log(post)
       res.render("singlepost", { ...post, loggedIn: req.session.loggedIn });
       // res.json(post);
     })
