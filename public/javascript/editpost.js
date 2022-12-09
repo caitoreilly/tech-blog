@@ -1,0 +1,1 @@
+// create 2 functions - one to update and one to delete linked to buttons created in onepost-dash.handlebars

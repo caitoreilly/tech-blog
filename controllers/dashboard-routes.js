@@ -38,6 +38,8 @@ router.get("/", withAuth, (req, res) => {
     });
 });
 
-// route to edit post 
+// route for one post in dashboard
+
+
 
 module.exports = router;

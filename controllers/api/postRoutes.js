@@ -22,4 +22,8 @@ router.post("/", withAuth, (req, res) => {
     });
 });
 
+// route to update posts 
+
+// route to delete posts 
+
 module.exports = router;
