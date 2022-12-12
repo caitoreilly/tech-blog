@@ -2,8 +2,7 @@ const { Post, Comment, User } = require("../models");
 
 const router = require("express").Router();
 
-// localhost:3001/ works
-
+// route to get all posts on homepage
 router.get("/", (req, res) => {
   Post.findAll({
     attributes: ["title", "body", "createdAt", "userId", "id"],
@@ -51,6 +50,7 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
+// route to get one post by id 
 router.get("/post/:id", (req, res) => {
   Post.findOne({
     where: { id: req.params.id },

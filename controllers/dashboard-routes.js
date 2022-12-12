@@ -3,12 +3,10 @@ const { Post, User, Comment } = require("../models");
 const withAuth = require("../utils/auth.js");
 
 // route to display dashboard once user is logged in - user can see all posts they have created
-
 router.get("/", withAuth, (req, res) => {
   console.log(req.session.userId);
   Post.findAll({
     where: {
-      // user_id: req.session.user_id,
       userId: req.session.userId,
     },
     attributes: ["title", "body"],
