@@ -2,10 +2,15 @@
   display: flex;
 }
 
-nav ul {
-  display: inline;
+.navbar {
+  display: flex;
+  padding: 10px;
 }
 
 .page-title {
   text-align: center;
+}
+
+.bodyinfo {
+  padding: 5px;
 }

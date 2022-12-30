@@ -1,3 +1,19 @@
-// data from post should appear inside of a textarea so user can update it 
-// have 2 buttons with id of post inside data-id attributes - one for update, one for delete
-// buttons connect to the editpost.js that will carry out the fetch to update and delete the post 
+<div class="card">
+  <div class="card-heading">
+    <h2>Edit</h2>
+  </div>
+  <form id="edit-post" class="card-body" data-id="{{id}}">
+    <input type="hidden" name="post-id" value="{{id}}" />
+    <label class="form-label" for="post-title">Title</label>
+    <input type="text" name="post-title" id="post-title" value="{{title}}" />
+    <label class="form-label" for="post-body">Post</label>
+    <textarea
+      name="post-body"
+      id="post-body"
+      class="form-input"
+    >{{body}}</textarea>
+    <button type="submit" class="btn">Update</button>
+    <button type="button" id="delete" class="btn">Delete</button>
+  </form>
+</div>
+<script src="/javascript/editpost.js"></script>

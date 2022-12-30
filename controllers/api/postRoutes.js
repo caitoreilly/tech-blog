@@ -22,8 +22,32 @@ router.post("/", withAuth, (req, res) => {
     });
 });
 
-// route to update posts 
+// route to update posts
+router.put("/:id", withAuth, (req, res) => {
+  Post.update(
+    {
+      title: req.body.title,
+      body: req.body.body,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
+    .then((updatedPostData) => {
+      if (!updatedPostData) {
+        res.status(404).json({ message: "No post found with this id" });
+        return;
+      }
+      res.json(updatedPostData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
-// route to delete posts 
+// route to delete posts
 
 module.exports = router;
