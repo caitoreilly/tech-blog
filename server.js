@@ -33,13 +33,13 @@ const sess = {
   // DB_USER: MySQL Username
   // DB_PW: MySQL Password
   // DB_SESSION_SECRET: this can be literally anything
-  secret: process.env.DB_SESSION_SECRET,
+  secret: "liam",
   cookie: { maxAge: 7200000 },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelize
-  })
+    db: sequelize,
+  }),
 };
 // Tell the app to use Express Session for the session handling
 app.use(session(sess));
