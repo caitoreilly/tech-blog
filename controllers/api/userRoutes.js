@@ -19,7 +19,7 @@ router.post("/", (req, res) => {
 
       res.json({ user: dbUserData, message: "You are now logged in!" });
     });
-  });
+  }).catch(err => res.status(500).json(err));
 });
 
 // login route that will verify the uers's identity (expects email & pw)
@@ -28,32 +28,34 @@ router.post("/login", (req, res) => {
     where: {
       email: req.body.email,
     },
-  }).then((dbUserData) => {
-    if (!dbUserData) {
-      res.status(400).json({ message: "No user with that email address!" });
-      return;
-    }
-    console.log(dbUserData);
-    console.log("++++++++++");
-    console.log(req.session);
+  })
+    .then((dbUserData) => {
+      if (!dbUserData) {
+        res.status(400).json({ message: "No user with that email address!" });
+        return;
+      }
+      console.log(dbUserData);
+      console.log("++++++++++");
+      console.log(req.session);
 
-    const validPassword = dbUserData.checkPassword(req.body.password);
+      const validPassword = dbUserData.checkPassword(req.body.password);
 
-    if (!validPassword) {
-      res.status(400).json({ message: "Incorrect password!" });
-      return;
-    }
+      if (!validPassword) {
+        res.status(400).json({ message: "Incorrect password!" });
+        return;
+      }
 
-    req.session.save(() => {
-      // declare session variables
-      req.session.userId = dbUserData.id;
-      req.session.username = dbUserData.username;
-      req.session.loggedIn = true;
-      console.log(req);
+      req.session.save(() => {
+        // declare session variables
+        req.session.userId = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
+        console.log(req);
 
-      res.json({ user: dbUserData, message: "You are now logged in!" });
-    });
-  });
+        res.json({ user: dbUserData, message: "You are now logged in!" });
+      });
+    })
+    .catch((err) => res.status(500).json(err));
 });
 
 // logout route 
