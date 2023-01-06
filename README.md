@@ -4,7 +4,7 @@
 
 ---
 
-Tech Blog is an online blog where developers have the ability to publish blog posts and comment on other users' blog posts as well. Additionally, users are able to edit and delete their own posts. This application follows the MVC paradigm in its structure and organization. Tech Blog uses Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication. For further information on how to install and use this app, please see the Usage section of this README, as well as my GitHub repository [here](https://github.com/caitoreilly/tech-blog.git) and deployed application [here](https://tranquil-basin-66760.herokuapp.com/).
+Tech Blog is an online blog where developers have the ability to publish blog posts and comment on other users' blog posts as well. Additionally, users are able to edit and delete their own posts. This application follows the MVC paradigm in its structure and organization. Tech Blog uses Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication. For further information on how to install and use this app, please see the Usage section of this README, as well as my GitHub repository [here](https://github.com/caitoreilly/tech-blog.git) and deployed application [here](https://stark-river-44881.herokuapp.com/).
 
 ## Table of Contents 
 
